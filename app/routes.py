@@ -40,12 +40,12 @@ def login():
 
 @app.route('/logout')
 @login_required
-    def logout():
+def logout():
         logout_user()
         return redirect(url_for('home'))
 
 @app.route('/register', methods=['GET', 'POST'])
-    def register():
+def register():
         if current_user.is_authenticated:
             return redirect(url_for('home'))
         form = RegistrationForm()
@@ -57,12 +57,12 @@ def login():
     
 @app.route('/<username>/history')
 @login_required
-    def history():
+def history():
         #code for displaying previous conversions goes here
     return render_template('history.html')
 
 @app.route('/results')
 @login_required
-    def results():
+def results():
         #code for displaying conversion and summary here
     return render_template('results.html')
