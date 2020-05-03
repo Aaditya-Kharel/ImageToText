@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title> Legal Document Summarrizzer</title>
+  <title>Summaryzer</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -22,6 +22,7 @@
          <li><a href="#logout">Logout</a></li>
       </ul>
 
+      
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
   </nav>
@@ -31,7 +32,6 @@
          <li><a href="{{url_for('compare_summary')}}">Compare</a></li>
          <li><a href="#logout">Logout</a></li>
       </ul>
-
 <!--Slider -->
  <section class="slider">
   <div id="index-banner" class="parallax-container">
@@ -39,9 +39,9 @@
       <li>
         <img src="backgroundblue.png" alt="Unsplashed background img 1" alt="">
         <div class="caption center-align">
-          <h2>Your Legal Document Now Simplified</h2>
+          <h2>Summarization Simplified</h2>
           <h5 class="light grey-text text-lighten-3 hide-on-small-only">
-           Summarize Your Legal Contract In Seconds!
+           Using SpaCy,Gensim,NLTK and Sumy
           </h5>
          
            <div class="row center">
@@ -52,7 +52,7 @@
       <li>
        <img src="backgroundpurple.png" alt="Unsplashed background img 1">
         <div class="caption left-align">
-          <h2>Legal Document Summarizer with SpaCy</h2>
+          <h2>Text Summarizer with SpaCy</h2>
           <h5 class="light grey-text text-lighten-3 hide-on-small-only">
            NLP based App
           </h5>
@@ -64,35 +64,19 @@
   </div>
 </section>
 
-<!-- Start of Main Section -->
+<!-- Start -->
  <div class="container">
     <div class="section">
+       
       <!--   Icon Section   -->
       <div class="row">
         <div class="input-field col s12 m10">
           <div class="icon-block">
-            <h2 class="center white-text"><i class="material-icons">chrome_reader_mode</i></h2>
-           <form method="POST" action="/analyze">
-         <textarea name="rawtext" cols="20" rows="20" class="form-control" required="true" placeholder="Enter Text Here"></textarea>
-        
-         <br/>
-         <button class="btn btn-small waves-effect waves-light pink lighten-1" input type="file" id="img" name="img" accept="image/*">Upload Image</button>
-         <button class="btn btn-small waves-effect waves-light light-blue lighten-1" type="submit">Summarize</button>
-          <button class="btn btn-small waves-effect waves-light purple lighten-1" type="reset">Clear</button>
+           <form method="POST" action="/comparer">
+         <textarea name="rawtext" cols="3" rows="5" class="form-control" required="true" placeholder="Enter Text Here"></textarea>
           
-        </form>
-          </div>
-        </div>
-
-      </div>
-
-        <div class="row">
-        <div class="input-field col s12 m10">
-          <div class="icon-block">
-            <h2 class="center white-text"><i class="material-icons">chrome_reader_mode</i></h2>
-           <form method="POST" action="/analyze_url">
-         <input type="text" name="raw_url" placeholder="Enter URL Here" required="true">
-         <button class="btn btn-small waves-effect waves-light light-blue lighten-1" type="submit">Summarize</button>
+         <br/>
+         <button class="btn btn-small waves-effect waves-light  light-blue lighten-1" type="submit">Summarize</button>
           <button class="btn btn-small waves-effect waves-light purple lighten-1" type="reset">Clear</button>
           
         </form>
@@ -105,42 +89,85 @@
   </div>
   <!-- End -->
 
-  <!-- Result Display-->
-  <section class="section section-solutions-about grey darken-2">
- <div class="container white-text">
- 
-      <!--   Icon Section   -->
+  <!-- Results -->
+  <section class="section section-solutions-about grey lighten-3 ">
+ <div class="container">
       <div class="row">
-        <div class="col s12 m6 dark-green darken-3">
+        <div class="col s12 m8">
           <div class="icon-block">
-            <h2 class="center white-text"><i class="material-icons">group</i></h2>
             <h5 class="center">Your Text</h5>
+
             <p class="light">{{ctext}}</p>
-            <div class="alert alert-info" role="alert">
-              <p>Time Elapsed: </span>{{ final_time }} mins </span></p>
-              <p>Reading Time: </span>{{ final_reading_time }} min </span></p>
+            <div class="alert alert-info" role="alert"><p>Time Elapsed: <span style="color:#0091EA;"></span>{{ final_time }} </span></p><br/>
+              <p>Reading Time: <span style="color:#0091EA;"></span>{{ final_reading_time }} </span></p>
         </div>
           </div>
         </div>
-
-        <div class="col s12 m6 dark-green darken-3">
-          <div class="icon-block">
-            <h2 class="center white-text"><i class="material-icons">chrome_reader_mode</i></h2>
-            <h5 class="center">Summarized</h5>
-              <div class="" role="alert">
-        </div>
-            <p class="light">{{ final_summary }}
-          </div>
-        </div>
-
       </div>
 
   
   </div>
 </section>
 
+    <!-- SECTION: RESULTS FOR DIFFERENT SUMMARIZERS -->
+  <section class="section section-solutions-about grey lighten-3 ">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m12 offset-m1">
+          <div class="row">
+            <div class="col s12">
+              <ul class="tabs">
+                <li class="tab col s3">
+                  <a href="#tab1" class="blue-text">SpaCy Summarizer</a>
+                </li>
+                <li class="tab col s3">
+                  <a href="#tab2" class="blue-text">Gensim Summarizer</a>
+                </li>
+                <li class="tab col s3">
+                  <a href="#tab3" class="blue-text">NLTK</a>
+                </li>
+                <li class="tab col s3">
+                  <a href="#tab4" class="blue-text">Sumy LexRank</a>
+                </li>
+            
+              </ul>
+            </div>
+            <div id="tab1" class="col s12">
+              <h5>SpaCy</h5>
+              <div class="" ><p>Reading Time: <span style="color:#0091EA;"></span>{{ summary_reading_time }} min  </span></p></div>
+              <div class="grey lighten-1"><p style="padding:5px;font-size:14px;">{{ final_summary_spacy }}</p></div>
+          
+                
+            </div>
+            <div id="tab2" class="col s12">
+              <h5>Gensim Summarizer</h5>
+              
+                <div class=""><p>Reading Time: <span style="color:#0091EA;"></span>{{ summary_reading_time_gensim }}  min </span></p>
+                </div>              <div class="grey lighten-2"><p style="padding:5px;font-size:14px;">{{ final_summary_gensim }}</p></div>
+         
+            </div>
+            <div id="tab3" class="col s12">
+              <h5>NLTK</h5>
+                 <div class=""><p>Reading Time: <span style="color:#0091EA;"></span>{{ summary_reading_time_nltk }} min  </span></p>
+              </div>
+              <div class="grey lighten-1"><p style="padding:5px;font-size:14px;">{{ final_summary_nltk }}</p></div>
+          
+            
+            </div>
+            <div id="tab4" class="col s12">
+              <h5>Sumy Summarizer</h5>
+              
+                <div class=""><p>Reading Time: <span style="color:#0091EA;"></span>{{ summary_reading_time_sumy}}  min </span></p>
+                </div>              <div class="grey lighten-2"><p style="padding:5px;font-size:14px;">{{ final_summary_sumy }}</p></div>
+         
+            </div>
+       
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  
   <footer class="page-footer dark-green darken-4">
     <div class="container" id="aboutapp">
       <div class="row">
